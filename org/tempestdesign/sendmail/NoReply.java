@@ -12,35 +12,36 @@ public class NoReply {
 	
 	
 	public static void main (String[] args) {
-		
-		final String un = "your gmail";
-		final String pw = "your gpass";
-		String mto, msub, mtext;
+		//
+		//
+		String user = getUN(),
+				pw = getPW(),
+				mto = getTo(),
+				msub = getSubject(),
+				mtext = getContents(); //
 		Date mdate = new Date();
-		mto = getTo();
-		msub = getSubject();
-		mtext = getBody();
-		
-		
-	
+		//
+		String host = "smtp.gmail.com";
+		String port = "587";
+		//
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.starttls.enable", "true");
-		prop.put("mail.smtp.host", "smtp.gmail.com");
-		prop.put("mail.smtp.port", "587");
-	
+		prop.put("mail.smtp.host", host);
+		prop.put("mail.smtp.port", port);
+		//
 		Session sesh = Session.getInstance(prop,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(un, pw);
+						return new PasswordAuthentication(user, pw);
 					}
-				});
-	 
-		
+				}); //
+		//
+		//
 		try {
 
 			Message m = new MimeMessage(sesh);
-			m.setFrom(new InternetAddress(un));
+			m.setFrom(new InternetAddress(user));
 			m.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(mto));
 			m.setSubject(msub);
@@ -52,25 +53,58 @@ public class NoReply {
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
-		}
-
+		} // end try/catch //
 		
 		
-	}
+		
+	} // end main //
 	
-	private static String getSubject() {
+	private static String getUN() {
+		
+		
+		
+		
 		return null;
-	}
-
-	private static String getBody() {
+	} // end getUN() //
+	
+	private static String getPW() {
+		
+		
+		
+		
 		return null;
-	}
-
+	} // end getPW() //
+	
 	private static String getTo() {
 		
-		return null;
 		
-	}
+		
+		
+		return null;
+	} // end getTo() //
+	
+	private static String getSubject() {
+		
+		
+		
+		
+		return null;
+	} // end get Subject() //
+
+	private static String getContents() {
+		
+		
+		
+		
+		return null;
+	} // end getContents() //
+
+	
 	
 
 }
+
+
+
+
+
