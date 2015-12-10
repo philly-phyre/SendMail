@@ -98,6 +98,13 @@ public class NoReply {
 		
 		return null;
 	} // end getContents() //
+	
+	/** *# Scanner subroutines #*
+	 *  *# #*
+	 * 
+	 * 
+	 * 
+	 */
 
 	
 	
