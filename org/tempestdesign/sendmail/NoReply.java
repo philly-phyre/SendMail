@@ -1,6 +1,7 @@
 package org.tempestdesign.sendmail;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.mail.*;
@@ -48,11 +49,11 @@ public class NoReply {
 			
 			setTo();
 			setSubject();
-			// setContent();
+			setContent();
 			
 			Message m = new MimeMessage(sesh);
 			m.setFrom(new InternetAddress(UN));
-			m.addRecipients(Message.RecipientType.TO, InternetAddress.parse(mto));
+			m.addRecipients(Message.RecipientType.TO, InternetAddress.parse(mto)); //////////////////////////////////////////
 			m.setSubject("l");
 			m.setSentDate(mdate);
 			m.setContent(cTEXT, cTYPE);
@@ -94,7 +95,7 @@ public class NoReply {
 			if(!sufd) {
 				UN += suf;
 			}
-		} else {
+		} else if(UN.length() <= 11) {
 			UN += suf;
 		}
 	} // end getUN() //
@@ -108,7 +109,7 @@ public class NoReply {
 	
 	private static void setPW() {
 		
-		sleep(1700);
+		sleep(900);
 		System.out.println(">> Please enter your GMAIL account password.");
 				/* **************************************** */
 		PW = sc.nextLine();
@@ -116,41 +117,26 @@ public class NoReply {
 	
 	private static void setTo() {
 		
-		boolean done = false;
+		sleep(900);
+		System.out.println(">> ?");
+		sleep(900);
+		System.out.println(">> Please enter the EMAIL addresses you would like to send your message to.");
+		sleep(900);
+		System.out.println(">> For multiple addresses, separate with a comma and no space.");
+		sleep(900);
+		System.out.println(">> (ex. \"me@here.com,you@there.com,them@where.com\")");
+		try {
+			mto = sc.nextLine();
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		} //
 		
-		sleep(1600);
-		System.out.println("");
-		System.out.println(">> Please enter the EMAIL addresses you woul like to send your message to.");
-		sleep(1600);
-		System.out.println("Separate the addresses by pressing the RETURN key each one.");
-		System.out.println("");
-		sleep(1600);
-		System.out.println("Enter \"done/DONE\" when you are finished.");
-		do {
-			
-			mto += sc.nextLine() + ",";
-			boolean sufd = mto.substring(mto.length()-6,mto.length()-2).equals("done");
-			boolean SUFD = mto.substring(mto.length()-6,mto.length()-2).equals("DONE");
-			if(sufd) {
-				done = true;
-				mto.replace("done,", "");
-			} else if(SUFD) {
-				done = true;
-				mto.replace("DONE,", "");
-			}
-			
-		} while(!done);
-		
-		
-		mto = null;
 	} // end getTo() //
 	
 	private static void setSubject() {
-		
-		
-		
-		
-		msub = null;
+		sleep(900);
+		System.out.println(">> Please enter the subject for your message.");
+		msub = sc.nextLine();
 	} // end get Subject() //
 
 	/** #Sleep(int) subroutine#
@@ -163,8 +149,12 @@ public class NoReply {
 	
 	public static void setContent() {
 		
-		cTEXT = "ll";
-		cTYPE = "text/plain";
+		
+		while(sc.hasNextLine()) {
+			cTEXT += sc.nextLine() + "\n";
+			
+		}
+		cTYPE = "text/html";
 		
 	}
 	//
