@@ -71,10 +71,9 @@ public class NoReply {
 		
 	} // end main //
 	
-	/** NoReply.getUN();
+	/** #NoReply.getUN();
 	 *  
 	 ** >> Prompts user for GMAIL address.
-	 * 
 	 * 
 	 * @return Returns valid GMAIL address as type String.
 	 */
@@ -84,22 +83,38 @@ public class NoReply {
 		String UN;
 		Scanner sc = new Scanner(System.in);
 		sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid Gmail username //
-		
-		System.out.println("\t >> Please enter your full gmail address \n"
-					+ "(ex. username@gmail.com, username@google.com, etc. \n)");
-			/*  **************************************  */
+		sc.next();
+		do {
+			System.out.println("\t >> Please enter your full gmail address \n"
+						+ "(ex. username@gmail.com, username@google.com, etc. \n)");
+				/*  **************************************  */
+		} while (!sc.hasNext());
+		sc.next();
 		UN = sc.next();
 		sc.close(); //
 		return UN;
 	} // end getUN() //
 	
+	/** #NoReply.getPW();
+	 *  
+	 ** >> Prompts user for GMAIL account password.
+	 * 
+	 * @return Returns valid GMAIL password as type String.
+	 */
+	
 	private static String getPW() {
 		
 		String PW;
 		Scanner sc = new Scanner(System.in);
+		sc.next();
+		do {
+			System.out.println("\t >> Please enter your GMAIL account password. \n");
+				/* **************************************** */
+			if(!sc.hasNext())
+				System.out.println("\t >> Please try again... \n");
+		} while (!sc.hasNext());
 		
-		System.out.println("\t >> Please enter your GMAIL account password. \n");
-		
+		sc.next();
 		PW = sc.next();
 		sc.close(); //
 		return PW;
@@ -130,6 +145,22 @@ public class NoReply {
 	} // end getContents() //
 		
 
+}
+
+/** #Sleep(int) subroutine
+ * 
+ *  >> Try/catch subroutine to put the currentThread() to sleep for n milliseconds.
+ * 
+ * @param int timeMS -- Time (in milliseconds) to (try/catch) to put the current thread to sleep.
+ * 
+ */
+
+public static void sleep(int timeMS) {
+	try {
+		Thread.sleep(2500);
+	} catch(InterruptedException e) {
+		Thread.currentThread().interrupt();
+	}
 }
 
 
