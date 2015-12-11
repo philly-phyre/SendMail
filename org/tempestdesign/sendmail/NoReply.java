@@ -12,8 +12,10 @@ public class NoReply {
 	// private static String host[] = {"smtp.gmail.com"};
 	private static String host = "smtp.gmail.com";
 	private static String port = "587";
-	private static String mto, msub;
+	@SuppressWarnings("unused")
+	private static String mto, msub, UN, PW, cTEXT, cTYPE;
 	
+	private static Scanner sc = new Scanner(System.in);
 	// 
 	//
 	
@@ -21,8 +23,8 @@ public class NoReply {
 	public static void main (String[] args) {
 		//
 		//
-		String user = getUN(),
-				pw = getPW();
+		setUN();
+		setPW();
 				
 		Date mdate = new Date();
 		//
@@ -37,24 +39,24 @@ public class NoReply {
 		Session sesh = Session.getInstance(prop,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(user, pw);
+						return new PasswordAuthentication(UN, PW);
 					}
 				}); //
 		//
 		//
 		try {
 			
-			mto = getTo();
-			msub = getSubject();
+			setTo();
+			setSubject();
 			
 			Message m = new MimeMessage(sesh);
-			m.setFrom(new InternetAddress(user));
-			m.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mto));
-			m.setSubject(msub);
+			m.setFrom(new InternetAddress(UN));
+			m.setRecipients(Message.RecipientType.TO, InternetAddress.parse("admin@tempestdesign.org"));
+			m.setSubject("l");
 			m.setSentDate(mdate);
 			
 			
-			m.setContent(Contents.TEXT, Contents.TYPE);
+			m.setContent(cTEXT, cTYPE);
 			
 
 			Transport.send(m);
@@ -69,6 +71,13 @@ public class NoReply {
 		
 	} // end main //
 	
+	public static void setContent() {
+		
+		cTEXT = "ll";
+		cTYPE = "text/plain";
+		
+	}
+	
 	/** #NoReply.getUN();#
 	 *  
 	 * >> Prompts user for GMAIL address.
@@ -76,22 +85,12 @@ public class NoReply {
 	 * @return Returns valid GMAIL address as type String.
 	 */
 	
-	private static String getUN() {
+	private static void setUN() {
 		
-		String UN;
-		Scanner sc = new Scanner(System.in);
-		sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid Gmail username //
-		sc.next();
-		do {
-			System.out.println("\t >> Please enter your full gmail address \n"
-						+ "(ex. username@gmail.com, username@google.com, etc. \n)");
+		sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
+		System.out.println(">> Please enter your full GMAIL address.");
 				/*  **************************************  */
-			sleep(2500);
-		} while (!sc.hasNext());
-		sc.next();
-		UN = sc.next();
-		sc.close(); //
-		return UN;
+		UN = sc.nextLine(); //
 	} // end getUN() //
 	
 	/** #NoReply.getPW();#
@@ -101,39 +100,28 @@ public class NoReply {
 	 * @return Returns valid GMAIL password as type String.
 	 */
 	
-	private static String getPW() {
+	private static void setPW() {
 		
-		String PW;
-		Scanner sc = new Scanner(System.in);
-		sc.next();
-		do {
-			System.out.println("\t >> Please enter your GMAIL account password. \n");
+		System.out.println(">> Please enter your GMAIL account password.");
 				/* **************************************** */
-			if(!sc.hasNext())
-				System.out.println("\t >> Please try again... \n");
-			sleep(2500);
-		} while (!sc.hasNext());
-		
-		sc.next();
-		PW = sc.next();
+		PW = sc.nextLine();
 		sc.close(); //
-		return PW;
 	} // end getPW() //
 	
-	private static String getTo() {
+	private static void setTo() {
 		
 		
 		
 		
-		return null;
+		mto = null;
 	} // end getTo() //
 	
-	private static String getSubject() {
+	private static void setSubject() {
 		
 		
 		
 		
-		return null;
+		msub = null;
 	} // end get Subject() //
 
 	/** #Sleep(int) subroutine#
@@ -153,23 +141,6 @@ public class NoReply {
 	} // end sleep(timeMS) //
 	
 } // end NoReply class //
-
-
-
-
-
-
-class Contents {
-	
-	public static String TEXT, TYPE;
-	
-	private Contents() {
-		
-		
-		
-	}
-	
-}
 
 
 
