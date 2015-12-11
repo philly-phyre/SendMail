@@ -48,10 +48,11 @@ public class NoReply {
 			
 			setTo();
 			setSubject();
+			// setContent();
 			
 			Message m = new MimeMessage(sesh);
 			m.setFrom(new InternetAddress(UN));
-			m.setRecipients(Message.RecipientType.TO, InternetAddress.parse("admin@tempestdesign.org"));
+			m.addRecipients(Message.RecipientType.TO, InternetAddress.parse(mto));
 			m.setSubject("l");
 			m.setSentDate(mdate);
 			
@@ -71,14 +72,7 @@ public class NoReply {
 		
 	} // end main //
 	
-	public static void setContent() {
-		
-		/*cTEXT = "ll";
-		cTYPE = "text/plain";*/
-		
-	}
-	
-	/** #NoReply.getUN();#
+	/** NoReply.#setUN()#
 	 *  
 	 * >> Prompts user for GMAIL username/address.
 	 * 
@@ -90,6 +84,7 @@ public class NoReply {
 	
 	private static void setUN() {
 		
+		sleep(2200);
 		String suf = "@gmail.com";
 		boolean sufd;
 		
@@ -102,7 +97,7 @@ public class NoReply {
 			UN += suf;
 	} // end getUN() //
 	
-	/** #NoReply.getPW()#
+	/** NoReply.#setPW()#
 	 *  
 	 * >> Prompts user for GMAIL account password.
 	 * 
@@ -111,6 +106,7 @@ public class NoReply {
 	
 	private static void setPW() {
 		
+		sleep(2200);
 		System.out.println(">> Please enter your GMAIL account password.");
 				/* **************************************** */
 		PW = sc.nextLine();
@@ -119,7 +115,27 @@ public class NoReply {
 	
 	private static void setTo() {
 		
+		boolean done = false;
 		
+		sleep(2200);
+		System.out.println("");
+		System.out.println(">> Please enter the EMAIL addresses you woul like to send your message to.");
+		sleep(2200);
+		System.out.println("Separate the addresses by pressing the RETURN key each one.");
+		System.out.println("");
+		sleep(2200);
+		System.out.println("Enter \"done/DONE\" when you are finished.");
+		do {
+			String suf = mto.substring(mto.length()-5,mto.length()-1);
+			mto += "," + sc.nextLine();
+			if(suf.equals("done") || suf.equals("DONE")) {
+				done = true;
+				mto.replace(",done", "").replace(",DONE", "");
+			} else {
+				mto += "," + sc.nextLine();
+			}
+			
+		} while(!done);
 		
 		
 		mto = null;
@@ -141,13 +157,22 @@ public class NoReply {
 	 * 
 	 */	
 	
-	/*public static void sleep(int timeMS) {
+	public static void setContent() {
+		
+		cTEXT = "ll";
+		cTYPE = "text/plain";
+		
+	}
+	//
+	//
+	//
+	public static void sleep(int timeMS) {
 		try {
 			Thread.sleep(timeMS);
 		} catch(InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-	} // end sleep(timeMS) // */
+	} // end sleep(timeMS) // 
 	
 } // end NoReply class //
 
