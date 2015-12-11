@@ -73,27 +73,36 @@ public class NoReply {
 	
 	public static void setContent() {
 		
-		cTEXT = "ll";
-		cTYPE = "text/plain";
+		/*cTEXT = "ll";
+		cTYPE = "text/plain";*/
 		
 	}
 	
 	/** #NoReply.getUN();#
 	 *  
-	 * >> Prompts user for GMAIL address.
+	 * >> Prompts user for GMAIL username/address.
+	 * 
+	 * >> Checks if user input is suffixed appropriately.
+	 * >> If the suffix "@gmail.com" is not attached, an if statement appends the suffix.
 	 * 
 	 * @return Returns valid GMAIL address as type String.
 	 */
 	
 	private static void setUN() {
 		
+		String suf = "@gmail.com";
+		boolean sufd;
+		
 		sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
-		System.out.println(">> Please enter your full GMAIL address.");
+		System.out.println(">> Please enter your GMAIL username/address.");
 				/*  **************************************  */
 		UN = sc.nextLine(); //
+		sufd = UN.substring(UN.length()-11,UN.length()-1).equals("@gmail.com");
+		if(!sufd)
+			UN += suf;
 	} // end getUN() //
 	
-	/** #NoReply.getPW();#
+	/** #NoReply.getPW()#
 	 *  
 	 * >> Prompts user for GMAIL account password.
 	 * 
@@ -132,13 +141,13 @@ public class NoReply {
 	 * 
 	 */	
 	
-	public static void sleep(int timeMS) {
+	/*public static void sleep(int timeMS) {
 		try {
 			Thread.sleep(timeMS);
 		} catch(InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-	} // end sleep(timeMS) //
+	} // end sleep(timeMS) // */
 	
 } // end NoReply class //
 
