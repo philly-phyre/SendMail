@@ -55,8 +55,6 @@ public class NoReply {
 			m.addRecipients(Message.RecipientType.TO, InternetAddress.parse(mto));
 			m.setSubject("l");
 			m.setSentDate(mdate);
-			
-			
 			m.setContent(cTEXT, cTYPE);
 			
 
@@ -84,7 +82,6 @@ public class NoReply {
 	
 	private static void setUN() {
 		
-		sleep(2200);
 		String suf = "@gmail.com";
 		boolean sufd;
 		
@@ -92,9 +89,14 @@ public class NoReply {
 		System.out.println(">> Please enter your GMAIL username/address.");
 				/*  **************************************  */
 		UN = sc.nextLine(); //
-		sufd = UN.substring(UN.length()-11,UN.length()-1).equals("@gmail.com");
-		if(!sufd)
+		if(UN.length() >= 11){
+			sufd = UN.substring(UN.length()-11,UN.length()-1).equals("@gmail.com");
+			if(!sufd) {
+				UN += suf;
+			}
+		} else {
 			UN += suf;
+		}
 	} // end getUN() //
 	
 	/** NoReply.#setPW()#
@@ -106,33 +108,35 @@ public class NoReply {
 	
 	private static void setPW() {
 		
-		sleep(2200);
+		sleep(1700);
 		System.out.println(">> Please enter your GMAIL account password.");
 				/* **************************************** */
 		PW = sc.nextLine();
-		sc.close(); //
 	} // end getPW() //
 	
 	private static void setTo() {
 		
 		boolean done = false;
 		
-		sleep(2200);
+		sleep(1600);
 		System.out.println("");
 		System.out.println(">> Please enter the EMAIL addresses you woul like to send your message to.");
-		sleep(2200);
+		sleep(1600);
 		System.out.println("Separate the addresses by pressing the RETURN key each one.");
 		System.out.println("");
-		sleep(2200);
+		sleep(1600);
 		System.out.println("Enter \"done/DONE\" when you are finished.");
 		do {
-			String suf = mto.substring(mto.length()-5,mto.length()-1);
-			mto += "," + sc.nextLine();
-			if(suf.equals("done") || suf.equals("DONE")) {
+			
+			mto += sc.nextLine() + ",";
+			boolean sufd = mto.substring(mto.length()-6,mto.length()-2).equals("done");
+			boolean SUFD = mto.substring(mto.length()-6,mto.length()-2).equals("DONE");
+			if(sufd) {
 				done = true;
-				mto.replace(",done", "").replace(",DONE", "");
-			} else {
-				mto += "," + sc.nextLine();
+				mto.replace("done,", "");
+			} else if(SUFD) {
+				done = true;
+				mto.replace("DONE,", "");
 			}
 			
 		} while(!done);
