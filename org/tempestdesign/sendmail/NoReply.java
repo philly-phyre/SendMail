@@ -86,7 +86,7 @@ public class NoReply {
 		String suf = "@gmail.com";
 		boolean sufd;
 		
-		sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
+		// sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
 		System.out.println(">> Please enter your GMAIL username/address.");
 				/*  **************************************  */
 		UN = sc.nextLine(); //
@@ -109,7 +109,7 @@ public class NoReply {
 	
 	private static void setPW() {
 		
-		sleep(900);
+		//sleep(900);
 		System.out.println(">> Please enter your GMAIL account password.");
 				/* **************************************** */
 		PW = sc.nextLine();
@@ -117,13 +117,13 @@ public class NoReply {
 	
 	private static void setTo() {
 		
-		sleep(900);
+		//sleep(900);
 		System.out.println(">> ?");
-		sleep(900);
-		System.out.println(">> Please enter the EMAIL addresses you would like to send your message to.");
-		sleep(900);
+		//sleep(900);
+		System.out.println(">> Please enter the EMAIL address(es) you would like to send your message to.");
+		//sleep(900);
 		System.out.println(">> For multiple addresses, separate with a comma and no space.");
-		sleep(900);
+		//sleep(900);
 		System.out.println(">> (ex. \"me@here.com,you@there.com,them@where.com\")");
 		try {
 			mto = sc.nextLine();
@@ -134,7 +134,7 @@ public class NoReply {
 	} // end getTo() //
 	
 	private static void setSubject() {
-		sleep(900);
+		//sleep(900);
 		System.out.println(">> Please enter the subject for your message.");
 		msub = sc.nextLine();
 	} // end get Subject() //
@@ -148,13 +148,15 @@ public class NoReply {
 	 */	
 	
 	public static void setContent() {
-		
-		
-		while(sc.hasNextLine()) {
-			cTEXT += sc.nextLine() + "\n";
-			
+		//sleep(900);
+		System.out.println(">> Perfect. Now begin typing your message.");
+		// sleep(900);
+		System.out.println(">> You may press RETURN at the end of each sentence or stopping point.");
+		System.out.println(">> RETURN a blank line to end the process and send the email.");
+		while(sc.hasNextLine() && !(sc.nextLine().equals(""))) {
+			cTEXT += sc.toString() + " \n ";
 		}
-		cTYPE = "text/html";
+		cTYPE = "text/plain";
 		
 	}
 	//
