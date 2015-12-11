@@ -5,7 +5,6 @@ import java.util.Properties;
 import java.util.Scanner;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.mail.util.*;
 
 public class NoReply {
 	
@@ -13,7 +12,7 @@ public class NoReply {
 	// private static String host[] = {"smtp.gmail.com"};
 	private static String host = "smtp.gmail.com";
 	private static String port = "587";
-	private static String mto, msub, mcont;
+	private static String mto, msub;
 	
 	// 
 	//
@@ -47,7 +46,6 @@ public class NoReply {
 			
 			mto = getTo();
 			msub = getSubject();
-			mcont = getContents(); //
 			
 			Message m = new MimeMessage(sesh);
 			m.setFrom(new InternetAddress(user));
@@ -55,9 +53,9 @@ public class NoReply {
 			m.setSubject(msub);
 			m.setSentDate(mdate);
 			
-			/*
-			m.setText(mtext);
-			*/
+			
+			m.setContent(Contents.TEXT, Contents.TYPE);
+			
 
 			Transport.send(m);
 
@@ -71,9 +69,9 @@ public class NoReply {
 		
 	} // end main //
 	
-	/** #NoReply.getUN();
+	/** #NoReply.getUN();#
 	 *  
-	 ** >> Prompts user for GMAIL address.
+	 * >> Prompts user for GMAIL address.
 	 * 
 	 * @return Returns valid GMAIL address as type String.
 	 */
@@ -88,6 +86,7 @@ public class NoReply {
 			System.out.println("\t >> Please enter your full gmail address \n"
 						+ "(ex. username@gmail.com, username@google.com, etc. \n)");
 				/*  **************************************  */
+			sleep(2500);
 		} while (!sc.hasNext());
 		sc.next();
 		UN = sc.next();
@@ -95,9 +94,9 @@ public class NoReply {
 		return UN;
 	} // end getUN() //
 	
-	/** #NoReply.getPW();
+	/** #NoReply.getPW();#
 	 *  
-	 ** >> Prompts user for GMAIL account password.
+	 * >> Prompts user for GMAIL account password.
 	 * 
 	 * @return Returns valid GMAIL password as type String.
 	 */
@@ -112,6 +111,7 @@ public class NoReply {
 				/* **************************************** */
 			if(!sc.hasNext())
 				System.out.println("\t >> Please try again... \n");
+			sleep(2500);
 		} while (!sc.hasNext());
 		
 		sc.next();
@@ -136,37 +136,32 @@ public class NoReply {
 		return null;
 	} // end get Subject() //
 
-	private static String getContents() {
-		
-		
-		
-		
-		return null;
-	} // end getContents() //
-		
+	/** #Sleep(int) subroutine#
+	 * 
+	 *  >> Try/catch subroutine to put the currentThread() to sleep for n milliseconds.
+	 * 
+	 * @param int timeMS -- Time (in milliseconds) to (try/catch) to put the current thread to sleep.
+	 * 
+	 */	
+	
+	public static void sleep(int timeMS) {
+		try {
+			Thread.sleep(timeMS);
+		} catch(InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+	} // end sleep(timeMS) //
+	
+} // end NoReply class //
 
-}
 
-/** #Sleep(int) subroutine
- * 
- *  >> Try/catch subroutine to put the currentThread() to sleep for n milliseconds.
- * 
- * @param int timeMS -- Time (in milliseconds) to (try/catch) to put the current thread to sleep.
- * 
- */
 
-public static void sleep(int timeMS) {
-	try {
-		Thread.sleep(2500);
-	} catch(InterruptedException e) {
-		Thread.currentThread().interrupt();
-	}
-}
+
 
 
 class Contents {
 	
-	public String TEXT, TYPE;
+	public static String TEXT, TYPE;
 	
 	private Contents() {
 		
@@ -175,6 +170,7 @@ class Contents {
 	}
 	
 }
+
 
 
 
