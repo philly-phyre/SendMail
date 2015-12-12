@@ -116,12 +116,13 @@ public class NoReply {
 	private static void setUN() {
 		
 		String suf = "@gmail.com";
-		boolean sufd = UN.endsWith("@gmail.com");
+		boolean sufd;
 		
 		// sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
 		System.out.println(">> Please enter your GMAIL username/address.");
 				/*  **************************************  */
 		UN = sc.nextLine(); //
+		sufd = UN.endsWith("@gmail.com");
 		if(!sufd) {
 				UN += suf;
 		} else if(UN.length() < 11) {
