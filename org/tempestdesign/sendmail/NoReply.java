@@ -13,7 +13,6 @@ public class NoReply {
 	// private static String host[] = {"smtp.gmail.com"};
 	private static String host = "smtp.gmail.com";
 	private static String port = "587";
-	@SuppressWarnings("unused")
 	private static String mto, msub, UN, PW, cTEXT, cTYPE;
 	private static boolean done = false;
 	
@@ -21,7 +20,12 @@ public class NoReply {
 	// 
 	//
 	
-	
+	/* 
+	 * 
+	 * 
+	 * vhldkjflhk
+	 * 
+	 * */
 	public static void main (String[] args) {
 		//
 		//
@@ -57,7 +61,7 @@ public class NoReply {
 				Message m = new MimeMessage(sesh);
 				m.setFrom(new InternetAddress(UN));
 				m.addRecipients(Message.RecipientType.TO, InternetAddress.parse(mto)); //////////////////////////////////////////
-				m.setSubject("l");
+				m.setSubject(msub);
 				m.setSentDate(mdate);
 				m.setContent(cTEXT, cTYPE);
 				
@@ -82,7 +86,7 @@ public class NoReply {
 			System.out.println(">> ?");
 			System.out.println(">> Would you like to send another message?");
 			System.out.println(">> # [Y/YES/y/yes/1] # [N/NO/n/no/0] #");
-			
+			System.out.print(">> ?");
 			String ck = sc.nextLine().toUpperCase();
 			if (ck.equals("Y") || ck.equals("YES") || ck.equals("1"))
 				;
@@ -112,20 +116,19 @@ public class NoReply {
 	private static void setUN() {
 		
 		String suf = "@gmail.com";
-		boolean sufd;
+		boolean sufd = UN.endsWith("@gmail.com");
 		
 		// sc.useDelimiter("(\\W|^)[\\w.+\\-]*@gmail\\.com(\\W|$)"); // Regular Expression to check for valid GMAIL username //
 		System.out.println(">> Please enter your GMAIL username/address.");
 				/*  **************************************  */
 		UN = sc.nextLine(); //
-		if(UN.length() >= 11){
-			sufd = UN.substring(UN.length()-11,UN.length()-1).equals("@gmail.com");
-			if(!sufd) {
+		if(!sufd) {
 				UN += suf;
-			}
-		} else if(UN.length() <= 11) {
+		} else if(UN.length() < 11) {
 			UN += suf;
 		}
+		System.out.println(">> ? \n>> ? \n>> ?USERNAME=" + UN + "\n>> ?");
+		sleep(650);
 	} // end getUN() //
 	
 	/** NoReply.#setPW()#
